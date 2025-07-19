@@ -1,0 +1,36 @@
+
+repos:
+  - repo: local
+    hooks:
+      - id: ruff
+        name: Run ruff
+        entry: ruff format
+        language: python
+        types:
+          - python
+      - id: ruff-check
+        name: Run ruff check
+        args:
+          - '--fix'
+          - '--unsafe-fixes'
+        entry: ruff check
+        language: python
+        types:
+          - python
+      - id: mypy
+        name: Run mypy
+        args:
+          - '--ignore-missing-imports'
+          - '--scripts-are-modules'
+        entry: mypy
+        require_serial: true
+        exclude: (^data|^notebooks)
+        language: python
+        types:
+          - python
+      - id: flake
+        name: Run flakeheaven
+        entry: flakeheaven lint
+        language: python
+        types:
+          - python
